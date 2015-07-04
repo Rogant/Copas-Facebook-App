@@ -1,0 +1,136 @@
+html{
+	font-family: Cambria, Georgia, serif;
+	color: #fff;
+}
+
+.col{
+	display: inline-block;
+}
+
+.col-50{
+	width: 50%;
+}
+
+#main{
+	background: url('../images/bg.jpg') no-repeat;
+	width: 810px;
+	height: 900px;
+	overflow: hidden;
+	padding-top: 85px;
+	box-sizing: border-box;
+
+	h1{
+		text-indent: -99999px;
+		margin: 0 0 0 auto;
+	}
+
+	.content{
+		padding: 0 50px;
+	}
+}
+
+#registro{
+	#main{
+		h1{
+			background: url('../images/registroTitle.png');
+			width: 329px;
+			height: 99px;
+		}
+
+		.title{
+			background: url('../images/regTitle.png') no-repeat;
+			width: 239px;
+			height: 63px;
+			margin-bottom: 0;
+		}
+
+		#registrer{
+			background: url('../images/formBg.png');
+			width: 366px;
+			height: 452px;
+			box-sizing: border-box;
+			padding: 0 50px;
+
+			.field{
+				input[type=text]{
+					border: 0;
+					background: none;
+					border-bottom: #e9cf3b 1px solid;
+					font-size: 20px;
+					padding-bottom: 15px;
+					margin-top: 15px;
+					width: 100%;
+					outline: 0;
+				}
+
+				input[type=file]{
+					border-bottom: #e9cf3b 1px solid;
+					padding-bottom: 15px;
+					width: 100%;
+					outline: 0;
+				}
+
+				input[type=submit]{
+					background: url('../images/sendBtn.png') no-repeat;
+					width: 114px;
+					height: 63px;
+					border: 0;
+					outline: 0;
+				}
+
+				input.error{
+					border-color: #E82A2A;
+				}
+
+				::-webkit-input-placeholder{
+					color: #fff;
+				}
+
+				p{
+					margin-bottom: 0;
+				}
+
+				.legal{
+					margin: 0;
+					font-size: 12px;
+				}
+
+				.col-50{
+					vertical-align: middle;
+				}
+
+				&:last-child{
+					margin-top: 15px;
+				}
+			}
+
+			label.error{
+				display: none !important;
+			}
+		}
+
+		.info{
+			margin-top: 90px;
+
+			ol{
+				color: #a51b46;
+				list-style-position: inside;
+				
+				li{
+					background: url('../images/olBg.png') no-repeat;
+					font-size: 24px;
+					padding: 5px 25px;
+					margin: 15px 0;
+
+					.text{
+						color: #fff;
+					}
+				}
+			}
+		}
+
+		.col-50{
+			vertical-align: top;
+		}
+	}
+}
