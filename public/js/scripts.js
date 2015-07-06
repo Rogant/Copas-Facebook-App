@@ -3,5 +3,13 @@ $(document).ready(function(){
 		submitHandler: function(form) {
 			$(form).submit();
 		}
-	})
+	});
+
+	$('.uploadBtn').click(function(){
+		$('#uploadLabel').trigger('click');
+	});
+
+	$('#uploadLabel').change(function(){
+		$('#uploadLabelForm').submit();
+	});
 });

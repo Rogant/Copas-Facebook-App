@@ -11,6 +11,18 @@ html{
 	width: 50%;
 }
 
+.col-55{
+	width: 55%;
+}
+
+.col-45{
+	width: 45%;
+}
+
+.hidden{
+	display: none;
+}
+
 #main{
 	background: url('../images/bg.jpg') no-repeat;
 	width: 810px;
@@ -25,7 +37,27 @@ html{
 	}
 
 	.content{
-		padding: 0 50px;
+		padding: 0 35px;
+
+		.info{
+			margin-top: 90px;
+
+			ol{
+				color: #a51b46;
+				list-style-position: inside;
+				
+				li{
+					background: url('../images/olBg.png') no-repeat;
+					font-size: 24px;
+					padding: 5px 25px;
+					margin: 15px 0;
+
+					.text{
+						color: #fff;
+					}
+				}
+			}
+		}		
 	}
 }
 
@@ -109,28 +141,65 @@ html{
 			}
 		}
 
-		.info{
-			margin-top: 90px;
+		.col-50{
+			vertical-align: top;
+		}
+	}
+}
 
-			ol{
-				color: #a51b46;
-				list-style-position: inside;
-				
-				li{
-					background: url('../images/olBg.png') no-repeat;
-					font-size: 24px;
-					padding: 5px 25px;
-					margin: 15px 0;
+#upload{
+	#main{
+		h1{
+			background: url('../images/uploadTitle.png') no-repeat;
+			width: 365px;
+			height: 76px;
+		}
 
-					.text{
-						color: #fff;
-					}
-				}
+		.title{
+			background: url('../images/ejemplo.png') no-repeat;
+			width: 239px;
+			height: 63px;
+		}
+
+		.col-55{
+			vertical-align: top;
+		}
+
+		.wrap{
+			width: 80%;
+			margin: 0 auto;
+
+			.descargaBtn{
+				background: url('../images/descargaBtn.png') no-repeat;
+				width: 141px;
+				height: 63px;
+				margin: 0 auto;
+			}
+
+			.uploadBtn{
+				background: url('../images/cargarBtn.png') no-repeat;
+				width: 141px;
+				height: 63px;
+				margin: 0 auto;
+				cursor: pointer;
 			}
 		}
 
-		.col-50{
-			vertical-align: top;
+	}
+}
+
+
+#gallery{
+	#main{
+		.label{
+			width: 33%;
+			display: inline-block;
+
+			.imgWrap{
+				img{
+					width: 100%;
+				}
+			}
 		}
 	}
 }
