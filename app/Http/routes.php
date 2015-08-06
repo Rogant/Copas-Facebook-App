@@ -13,7 +13,58 @@
 Route::any('/', function (SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb) {
 	//$userFacebookID = 776627385;
     //return view('index')->with('userFacebookID', $userFacebookID);
-    	echo '<script>window.location = "'.$fb->getLoginUrl(['email']).'";</script>';
+    //return redirect($fb->getLoginUrl(['email']));
+    //echo '<script>window.top.location.href = "'.$fb->getLoginUrl(['email']).'";</script>';
+    //echo '<script>window.top.location.href = "'.$fb->getReRequestUrl(['email'], 'https://www.facebook.com/pages/Walking-Dead/178582138819465?sk=app_1616041778638428&app_data=fbAut').'";</script>';
+
+    try {
+        $token = $fb->getPageTabHelper()->getAccessToken();
+    } catch (Facebook\Exceptions\FacebookSDKException $e) {
+        // Failed to obtain access token
+        dd($e->getMessage());
+    }
+
+    if (! $token) {
+        // Get the redirect helper
+        $helper = $fb->getRedirectLoginHelper();
+
+        if (! $helper->getError()) {
+            echo '<script>window.top.location.href = "'.$fb->getReRequestUrl(['email'], 'https://www.facebook.com/pages/Walking-Dead/178582138819465?sk=app_1616041778638428&app_data=fbAut').'";</script>';
+        }
+
+        // User denied the request
+        dd(
+            $helper->getError(),
+            $helper->getErrorCode(),
+            $helper->getErrorReason(),
+            $helper->getErrorDescription()
+        );
+    }
+
+    if (! $token->isLongLived()) {
+        // OAuth 2.0 client handler
+        $oauth_client = $fb->getOAuth2Client();
+
+        // Extend the access token.
+        try {
+            $token = $oauth_client->getLongLivedAccessToken($token);
+        } catch (Facebook\Exceptions\FacebookSDKException $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    $fb->setDefaultAccessToken($token);
+
+    // Get basic info on the user from Facebook.
+    try {
+        $response = $fb->get('/me?fields=id,name,email');
+    } catch (Facebook\Exceptions\FacebookSDKException $e) {
+        dd($e->getMessage());
+    }
+
+    // Convert the response to a `Facebook/GraphNodes/GraphUser` collection
+    $facebook_user = $response->getGraphUser();    
+    return view('index')->with('userFacebookID', $facebook_user['id']);
 });
 
 Route::post('/registro', function () {
