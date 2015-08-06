@@ -10,8 +10,17 @@
 					<div class="imgWrap">
 						<img src="uploads/labels/{{ $label->label }}" alt="">
 					</div>
-					<p class="name"></p>
-					<div class="countBox"></div>
+					<p class="name">{{ $label->nombre }}</p>
+					<div class="countBox">
+						<div class="col">
+							<a href="javascript:;" class="votar" data-label="{{ $label->id }}">
+								<img src="images/likeBtn.jpg" alt="">
+							</a>
+						</div>
+						<div class="col num">
+							{{ $label->votos }}
+						</div>
+					</div>
 				</div>
 			@endforeach
 		</div>

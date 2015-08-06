@@ -13,7 +13,7 @@
 Route::any('/', function (SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb) {
 	//$userFacebookID = 776627385;
     //return view('index')->with('userFacebookID', $userFacebookID);
-    	echo '<script>window.location.assign("'.$fb->getLoginUrl(['email']).'")</script>';
+    	echo '<script>window.location = "'.$fb->getLoginUrl(['email']).'";</script>';
 });
 
 Route::post('/registro', function () {
@@ -45,13 +45,22 @@ Route::post('/upload', function () {
 		$datos
 	);
 
-    return redirect()->route('gallery');
+    return redirect('gallery');
 });
 
 Route::get('gallery', function () {
 	$labels = DB::table('label')
-		->join('usuarios', 'usuarios.id', '=', 'label.idUser')
+        ->select(array(
+            'label.label',
+            'usuarios.nombre',
+            'label.id',
+            DB::raw('(SELECT count(*) FROM votos WHERE votos.labelID = label.id) AS votos')
+        ))
+        ->join('usuarios', 'usuarios.id', '=', 'label.idUser')
+        ->orderBy('label.fecha', 'desc')
 		->get();
+
+    $votos = DB::table('votos')->where('labelID', '=',  Session::get('facebookID'))->count();
 
     return view('gallery')->with('labels', $labels);
 });
@@ -110,12 +119,41 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
 
     // Convert the response to a `Facebook/GraphNodes/GraphUser` collection
     $facebook_user = $response->getGraphUser();
+    Session::put('facebookID', $facebook_user['id']);
 
-    $query = DB::table('usuarios')->select('facebookID')->where('facebookID', '=', $facebook_user['id'])->first();
 
-    if($query){
+    $query = DB::table('usuarios')->where('facebookID', '=', $facebook_user['id'])->count();
+
+    if($query > 0){
     	return redirect('gallery');
     }else{
     	return view('index')->with('userFacebookID', $facebook_user['id']);
     }
+});
+
+Route::post('ajaxVote', function () {
+    $datos = Request::input();
+    $datos['facebookID'] = Session::get('facebookID');
+    $datos['fecha'] = date('Y-m-d H:i:s');
+
+    $votos = DB::table('votos')
+        ->where('facebookID', '=',  $datos['facebookID'])
+        ->where('labelID', '=',  $datos['labelID'])
+        ->count();
+
+    $response = new stdClass();
+
+    if($votos > 0){
+        $response->code = false;
+        $response->message = 'Ya votaste por esta etiqueta';
+    }else{
+        DB::table('votos')->insert(
+            $datos
+        );
+
+        $response->code = true;
+        $response->message = 'Voto Exitoso';
+    }
+
+    echo json_encode($response);
 });
