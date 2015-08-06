@@ -11,12 +11,6 @@
 */
 
 Route::any('/', function (SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb) {
-	//$userFacebookID = 776627385;
-    //return view('index')->with('userFacebookID', $userFacebookID);
-    //return redirect($fb->getLoginUrl(['email']));
-    //echo '<script>window.top.location.href = "'.$fb->getLoginUrl(['email']).'";</script>';
-    //echo '<script>window.top.location.href = "'.$fb->getReRequestUrl(['email'], 'https://www.facebook.com/pages/Walking-Dead/178582138819465?sk=app_1616041778638428&app_data=fbAut').'";</script>';
-
     try {
         $token = $fb->getPageTabHelper()->getAccessToken();
     } catch (Facebook\Exceptions\FacebookSDKException $e) {
