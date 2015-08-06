@@ -4,6 +4,18 @@
 @section('content')
 	<h1>ESCOGE EL TEMA DE TU DISEÑO</h1>
 	<div class="content">
+		<div class="header">
+			<div class="col">
+				<a href="gallery?masVotados=true">
+					<img src="images/masVotadosBtn.png">
+				</a>
+			</div>
+			<div class="col">
+				<form action="gallery" method="GET">
+					<input type="text" name="nombre" id="search" placeholder="Buscar nombre">
+				</form>
+			</div>
+		</div>
 		<div id="wrapGallery">
 			@foreach ($labels as $label)
 				<div class="label">
@@ -23,6 +35,12 @@
 					</div>
 				</div>
 			@endforeach
+		</div>
+		<div id="pagination">
+			<?php
+				$labels->setPath('gallery');
+				echo $labels->render();
+			?>
 		</div>
 	</div>
 @endsection

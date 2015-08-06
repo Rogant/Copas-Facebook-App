@@ -105,18 +105,41 @@ Route::post('/upload', function () {
 });
 
 Route::get('gallery', function () {
-	$labels = DB::table('label')
-        ->select(array(
-            'label.label',
-            'usuarios.nombre',
-            'label.id',
-            DB::raw('(SELECT count(*) FROM votos WHERE votos.labelID = label.id) AS votos')
-        ))
-        ->join('usuarios', 'usuarios.id', '=', 'label.idUser')
-        ->orderBy('label.fecha', 'desc')
-		->get();
-
-    $votos = DB::table('votos')->where('labelID', '=',  Session::get('facebookID'))->count();
+    if(isset($_GET['masVotados'])){
+        $labels = DB::table('label')
+            ->select(array(
+                'label.label',
+                'usuarios.nombre',
+                'label.id',
+                DB::raw('(SELECT count(*) FROM votos WHERE votos.labelID = label.id) AS votos')
+            ))
+            ->join('usuarios', 'usuarios.id', '=', 'label.idUser')
+            ->orderBy('votos', 'desc')
+            ->paginate(6);
+    }else if(isset($_GET['nombre'])){
+        $labels = DB::table('label')
+            ->select(array(
+                'label.label',
+                'usuarios.nombre',
+                'label.id',
+                DB::raw('(SELECT count(*) FROM votos WHERE votos.labelID = label.id) AS votos')
+            ))
+            ->join('usuarios', 'usuarios.id', '=', 'label.idUser')
+            ->where('usuarios.nombre', 'like', '%'.$_GET['nombre'].'%')
+            ->orderBy('label.fecha', 'desc')
+            ->paginate(6);
+    }else{
+        $labels = DB::table('label')
+            ->select(array(
+                'label.label',
+                'usuarios.nombre',
+                'label.id',
+                DB::raw('(SELECT count(*) FROM votos WHERE votos.labelID = label.id) AS votos')
+            ))
+            ->join('usuarios', 'usuarios.id', '=', 'label.idUser')
+            ->orderBy('label.fecha', 'desc')
+            ->paginate(6);
+    }
 
     return view('gallery')->with('labels', $labels);
 });

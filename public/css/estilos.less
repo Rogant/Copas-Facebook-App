@@ -84,7 +84,7 @@ html{
 			padding: 0 50px;
 
 			.field{
-				input[type=text]{
+				input[type=text], input[type=email]{
 					border: 0;
 					background: none;
 					border-bottom: #e9cf3b 1px solid;
@@ -191,8 +191,32 @@ html{
 
 #gallery{
 	#main{
-		#wrapGallery{
-			margin: 80px 0 0;
+		h1{
+			background: url('../images/galleryTitle.png') no-repeat;
+			width: 342px;
+			height: 74px;
+			margin-top: 30px;
+		}
+
+		.header{
+			text-align: right;
+			margin: 0 0 15px 0;
+
+			.col{
+				vertical-align: top;
+			}
+
+			#search{
+				color: #8a8a8a;
+				border: 0;
+				padding: 0;
+				background: url('../images/searchBg.png');
+				width: 195px;
+				height: 25px;
+				text-align: center;
+				outline: 0;
+				margin: 0 0 0 10px;
+			}
 		}
 
 		.label{
@@ -234,6 +258,31 @@ html{
 					padding: 3px 10px;
 					color: #9fa2a9;
 					border: 1px solid #9fa2a9;
+				}
+			}
+		}
+	}
+}
+
+#pagination{
+	text-align: center;
+	margin: 40px 0 0 0;
+
+	.pagination{
+		padding: 0;
+		margin: 0;
+
+		li{
+			list-style: none;
+			display: inline-block;
+			margin: 0 10px;
+
+			a{
+				color: #851638;
+				text-decoration: none;
+
+				&[rel=next], &[rel=prev]{
+					color: #965166;
 				}
 			}
 		}

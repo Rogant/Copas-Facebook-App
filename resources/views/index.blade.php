@@ -9,7 +9,7 @@
 			{!! Form::open(array('url' => 'registro', 'id' => 'registrer', 'method' => 'post', 'files' => true)) !!}
 				<input type="hidden" name="facebookID" value="{{ $userFacebookID }}">
 				<div class="field"><input type="text" name="nombre" placeholder="Nombre completo" required></div>
-				<div class="field"><input type="text" name="email" placeholder="Correo Electrónico" required></div>
+				<div class="field"><input type="email" name="email" placeholder="Correo Electrónico" required></div>
 				<div class="field"><input type="text" name="telefono" placeholder="Teléfono" required></div>
 				<div class="field"><input type="text" name="cedula" placeholder="Cédula" required></div>
 				<div class="field"><input type="text" name="ciudad" placeholder="Ciudad" required></div>
