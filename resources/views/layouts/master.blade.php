@@ -5,11 +5,13 @@
 	<title>Copas</title>
 
 	{!! HTML::style('css/normalize.css') !!}
+	{!! HTML::style('css/jquery.fancybox.css') !!}
 	{!! HTML::style('css/estilos.less', array('rel' => 'stylesheet/less')) !!}
 
 	{!! HTML::script('js/jquery-1.11.1.min.js') !!}
 	{!! HTML::script('js/jquery.validate.min.js') !!}
 	{!! HTML::script('js/localization/messages_es.js') !!}
+	{!! HTML::script('js/jquery.fancybox.pack.js') !!}
 	{!! HTML::script('js/scripts.js') !!}
 
 

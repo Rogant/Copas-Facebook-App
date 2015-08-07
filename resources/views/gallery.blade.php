@@ -43,4 +43,28 @@
 			?>
 		</div>
 	</div>
+	<div id="labelLb" class="hidden">
+		<div class="label">
+			<div class="imgWrap">
+				<div class="vCenter">
+					<img alt="">
+				</div>
+			</div>
+			<div class="footer">
+				<div class="col">
+					<p class="name"></p>
+				</div>
+				<div class="col">
+					<div class="countBox">
+						<div class="col">
+							<a href="javascript:;" class="votar" data-label="">
+								<img src="images/likeBtn.jpg" alt="">
+							</a>
+						</div>
+						<div class="col num"></div>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>
 @endsection

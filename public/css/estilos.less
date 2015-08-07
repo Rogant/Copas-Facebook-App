@@ -26,7 +26,7 @@ html{
 #main{
 	background: url('../images/bg.jpg') no-repeat;
 	width: 810px;
-	height: 900px;
+	height: 800px;
 	overflow: hidden;
 	padding-top: 85px;
 	box-sizing: border-box;
@@ -227,9 +227,11 @@ html{
 			margin: 0px 2px;
 			box-sizing: border-box;
 			display: inline-block;
+			overflow: hidden;
 
 			.imgWrap{
 				text-align: center;
+				cursor: pointer;
 
 				img{
 					height: 115px;
@@ -284,6 +286,76 @@ html{
 				&[rel=next], &[rel=prev]{
 					color: #965166;
 				}
+			}
+		}
+	}
+}
+
+.fancybox-skin{
+	background: none !important;
+	padding: 0 !important;
+	box-shadow: none !important;
+
+	#labelLb{
+		.label{
+			background: url('../images/lightbox-bg.png');
+			width: 555px;
+			height: 485px;
+			padding: 40px 50px 0;
+			box-sizing: border-box;
+
+			.imgWrap{
+				background: url('../images/vaso-sanson-app.png') no-repeat center center;
+				background-size: auto, 100%;
+				text-align: center;
+				height: 350px;
+
+				.vCenter{
+					position: relative;
+					top: 50%;
+					transform: translateY(-50%);
+
+					img{
+						width: 173px;
+						max-height: 280px;
+					}
+				}
+			}
+
+			.footer{
+				margin: 20px 0 0 0;
+
+				& > .col{
+					width: 50%;
+
+					&:first-child{
+						text-align: left;
+					}
+
+					&:last-child{
+						text-align: right;
+					}				
+				}
+
+				.name{
+					color: #a51b46;
+					margin: 0;
+					font-size: 16px;
+				}
+
+				.countBox{
+					.col{
+						vertical-align: bottom;
+					}
+
+					.num{
+						margin: 0 0 0 10px;
+						background: #fff;
+						padding: 3px 10px;
+						color: #9fa2a9;
+						border: 1px solid #9fa2a9;
+					}
+				}				
 			}
 		}
 	}
