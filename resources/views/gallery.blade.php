@@ -6,6 +6,11 @@
 	<div class="content">
 		<div class="header">
 			<div class="col">
+				<a href="gallery?alf=true">
+					<img src="images/btnAlfabetico.png">
+				</a>
+			</div>
+			<div class="col">
 				<a href="gallery?masVotados=true">
 					<img src="images/masVotadosBtn.png">
 				</a>

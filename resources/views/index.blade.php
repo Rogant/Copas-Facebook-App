@@ -29,21 +29,31 @@
 		</div>
 		<div class="col col-50">
 			<div class="info">
-				<ol>
+				<img src="images/infoRegistro.png" alt="">
+				<!--<ol>
 					<li>
-						<div class="text">&nbsp;&nbsp; Registra tus datos en el formulario</div>
+						<div class="text">
+							&nbsp;&nbsp; Registra tus datos en el<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formulario
+						</div>
 					</li>
 					<li>
 						<div class="text">&nbsp;&nbsp; Elabora tu diseño</div>
 					</li>
 					<li>
-						<div class="text">&nbsp;&nbsp; Invita a tus amigos a escoger tu diseño</div>
+						<div class="text">
+							&nbsp;&nbsp; Invita a tus amigos a <br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; escoger tu diseño
+						</div>
 					</li>
 					<li>
 						<div class="text">&nbsp;&nbsp; Gana <b>$500.000</b></div>
 					</li>
-				</ol>
+				</ol>-->
 			</div>
 		</div>	
 	</div>
+	<a href="gallery">
+		<div id="btnGaleria"></div>
+	</a>
 @endsection

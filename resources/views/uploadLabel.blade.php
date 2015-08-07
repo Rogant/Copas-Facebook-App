@@ -22,7 +22,8 @@
 		</div>
 		<div class="col col-45">
 			<div class="info">
-				<ol>
+				<img src="images/infoPasos.png" alt="">
+				<!--<ol>
 					<li>
 						<div class="text">&nbsp;&nbsp; Riqueza y naturaleza colombiana</div>
 					</li>
@@ -35,8 +36,11 @@
 					<li>
 						<div class="text">&nbsp;&nbsp; Sansón: pócimas, mitos y leyendas</div>
 					</li>
-				</ol>
+				</ol>-->
 			</div>
 		</div>	
 	</div>
+	<a href="gallery">
+		<div id="btnGaleria"></div>
+	</a>	
 @endsection

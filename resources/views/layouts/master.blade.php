@@ -20,6 +20,9 @@
 <body id="@yield('page')">
 	<div id="main">
 		@yield('content')
+		<div id="terminos">
+			<a href="terminos">Términos y condiciones.</a>
+		</div>
 	</div>
 </body>
 </html>

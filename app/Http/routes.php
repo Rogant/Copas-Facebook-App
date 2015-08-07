@@ -11,65 +11,65 @@
 */
 
 Route::any('/', function (SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb) {
-    try {
-        $token = $fb->getPageTabHelper()->getAccessToken();
-    } catch (Facebook\Exceptions\FacebookSDKException $e) {
-        // Failed to obtain access token
-        dd($e->getMessage());
-    }
+	try {
+		$token = $fb->getPageTabHelper()->getAccessToken();
+	} catch (Facebook\Exceptions\FacebookSDKException $e) {
+		// Failed to obtain access token
+		dd($e->getMessage());
+	}
 
-    if (! $token) {
-        // Get the redirect helper
-        $helper = $fb->getRedirectLoginHelper();
+	if (! $token) {
+		// Get the redirect helper
+		$helper = $fb->getRedirectLoginHelper();
 
-        if (! $helper->getError()) {
-            echo '<script>window.top.location.href = "'.$fb->getLoginUrl(['email'], 'https://www.facebook.com/pages/Walking-Dead/178582138819465?sk=app_1616041778638428').'";</script>';
-        }
+		if (! $helper->getError()) {
+			echo '<script>window.top.location.href = "'.$fb->getLoginUrl(['email'], 'https://www.facebook.com/pages/Walking-Dead/178582138819465?sk=app_1616041778638428').'";</script>';
+		}
 
-        // User denied the request
-        dd(
-            $helper->getError(),
-            $helper->getErrorCode(),
-            $helper->getErrorReason(),
-            $helper->getErrorDescription()
-        );
-    }
+		// User denied the request
+		dd(
+			$helper->getError(),
+			$helper->getErrorCode(),
+			$helper->getErrorReason(),
+			$helper->getErrorDescription()
+		);
+	}
 
-    if (! $token->isLongLived()) {
-        // OAuth 2.0 client handler
-        $oauth_client = $fb->getOAuth2Client();
+	if (! $token->isLongLived()) {
+		// OAuth 2.0 client handler
+		$oauth_client = $fb->getOAuth2Client();
 
-        // Extend the access token.
-        try {
-            $token = $oauth_client->getLongLivedAccessToken($token);
-        } catch (Facebook\Exceptions\FacebookSDKException $e) {
-            dd($e->getMessage());
-        }
-    }
+		// Extend the access token.
+		try {
+			$token = $oauth_client->getLongLivedAccessToken($token);
+		} catch (Facebook\Exceptions\FacebookSDKException $e) {
+			dd($e->getMessage());
+		}
+	}
 
-    $fb->setDefaultAccessToken($token);
+	$fb->setDefaultAccessToken($token);
 
-    // Save for later
-    Session::put('fb_user_access_token', (string) $token);    
+	// Save for later
+	Session::put('fb_user_access_token', (string) $token);    
 
-    // Get basic info on the user from Facebook.
-    try {
-        $response = $fb->get('/me?fields=id,name,email');
-    } catch (Facebook\Exceptions\FacebookSDKException $e) {
-        dd($e->getMessage());
-    }
+	// Get basic info on the user from Facebook.
+	try {
+		$response = $fb->get('/me?fields=id,name,email');
+	} catch (Facebook\Exceptions\FacebookSDKException $e) {
+		dd($e->getMessage());
+	}
 
-    $facebook_user = $response->getGraphUser();
-    Session::put('facebookID', $facebook_user['id']);
+	$facebook_user = $response->getGraphUser();
+	Session::put('facebookID', $facebook_user['id']);
 
 
-    $query = DB::table('usuarios')->where('facebookID', '=', $facebook_user['id'])->count();
+	$query = DB::table('usuarios')->where('facebookID', '=', $facebook_user['id'])->count();
 
-    if($query > 0){
-        return redirect('gallery');
-    }else{
-        return view('index')->with('userFacebookID', $facebook_user['id']);
-    }
+	if($query > 0){
+		return redirect('gallery');
+	}else{
+		return view('index')->with('userFacebookID', $facebook_user['id']);
+	}
 });
 
 Route::post('/registro', function () {
@@ -85,7 +85,7 @@ Route::post('/registro', function () {
 		$datos
 	);
 
-    return view('uploadLabel')->with('userID', $userID);
+	return view('uploadLabel')->with('userID', $userID);
 });
 
 Route::post('/upload', function () {
@@ -101,72 +101,89 @@ Route::post('/upload', function () {
 		$datos
 	);
 
-    return redirect('gallery');
+	return redirect('gallery');
 });
 
 Route::get('gallery', function () {
-    if(isset($_GET['masVotados'])){
-        $labels = DB::table('label')
-            ->select(array(
-                'label.label',
-                'usuarios.nombre',
-                'label.id',
-                DB::raw('(SELECT count(*) FROM votos WHERE votos.labelID = label.id) AS votos')
-            ))
-            ->join('usuarios', 'usuarios.id', '=', 'label.idUser')
-            ->orderBy('votos', 'desc')
-            ->paginate(6);
-    }else if(isset($_GET['nombre'])){
-        $labels = DB::table('label')
-            ->select(array(
-                'label.label',
-                'usuarios.nombre',
-                'label.id',
-                DB::raw('(SELECT count(*) FROM votos WHERE votos.labelID = label.id) AS votos')
-            ))
-            ->join('usuarios', 'usuarios.id', '=', 'label.idUser')
-            ->where('usuarios.nombre', 'like', '%'.$_GET['nombre'].'%')
-            ->orderBy('label.fecha', 'desc')
-            ->paginate(6);
-    }else{
-        $labels = DB::table('label')
-            ->select(array(
-                'label.label',
-                'usuarios.nombre',
-                'label.id',
-                DB::raw('(SELECT count(*) FROM votos WHERE votos.labelID = label.id) AS votos')
-            ))
-            ->join('usuarios', 'usuarios.id', '=', 'label.idUser')
-            ->orderBy('label.fecha', 'desc')
-            ->paginate(6);
-    }
+	if(isset($_GET['masVotados'])){
+		$labels = DB::table('label')
+			->select(array(
+				'label.label',
+				'usuarios.nombre',
+				'label.id',
+				DB::raw('(SELECT count(*) FROM votos WHERE votos.labelID = label.id) AS votos')
+			))
+			->join('usuarios', 'usuarios.id', '=', 'label.idUser')
+			->orderBy('votos', 'desc')
+			->paginate(6);
+	}else if(isset($_GET['nombre'])){
+		$labels = DB::table('label')
+			->select(array(
+				'label.label',
+				'usuarios.nombre',
+				'label.id',
+				DB::raw('(SELECT count(*) FROM votos WHERE votos.labelID = label.id) AS votos')
+			))
+			->join('usuarios', 'usuarios.id', '=', 'label.idUser')
+			->where('usuarios.nombre', 'like', '%'.$_GET['nombre'].'%')
+			->orderBy('label.fecha', 'desc')
+			->paginate(6);
+	}else if(isset($_GET['alf'])){
+		$labels = DB::table('label')
+			->select(array(
+				'label.label',
+				'usuarios.nombre',
+				'label.id',
+				DB::raw('(SELECT count(*) FROM votos WHERE votos.labelID = label.id) AS votos')
+			))
+			->join('usuarios', 'usuarios.id', '=', 'label.idUser')
+			->orderBy('usuarios.nombre', 'asc')
+			->paginate(6);		
+	}else{
+		$labels = DB::table('label')
+			->select(array(
+				'label.label',
+				'usuarios.nombre',
+				'label.id',
+				DB::raw('(SELECT count(*) FROM votos WHERE votos.labelID = label.id) AS votos')
+			))
+			->join('usuarios', 'usuarios.id', '=', 'label.idUser')
+			->orderBy('label.fecha', 'desc')
+			->paginate(6);
+	}
 
-    return view('gallery')->with('labels', $labels);
+	return view('gallery')->with('labels', $labels);
 });
 
 Route::post('ajaxVote', function () {
-    $datos = Request::input();
-    $datos['facebookID'] = Session::get('facebookID');
-    $datos['fecha'] = date('Y-m-d H:i:s');
+	$datos = Request::input();
+	$datos['facebookID'] = Session::get('facebookID');
+	$datos['fecha'] = date('Y-m-d H:i:s');
 
-    $votos = DB::table('votos')
-        ->where('facebookID', '=',  $datos['facebookID'])
-        ->where('labelID', '=',  $datos['labelID'])
-        ->count();
+	$votos = DB::table('votos')
+		->where('facebookID', '=',  $datos['facebookID'])
+		->where('labelID', '=',  $datos['labelID'])
+		->count();
 
-    $response = new stdClass();
+	$response = new stdClass();
 
-    if($votos > 0){
-        $response->code = false;
-        $response->message = 'Ya votaste por esta etiqueta';
-    }else{
-        DB::table('votos')->insert(
-            $datos
-        );
+	if($votos > 0){
+		$response->code = false;
+		$response->message = 'Ya votaste por esta etiqueta';
+	}else{
+		DB::table('votos')->insert(
+			$datos
+		);
 
-        $response->code = true;
-        $response->message = 'Voto Exitoso';
-    }
+		$response->code = true;
+		$response->message = 'Voto Exitoso';
+	}
 
-    echo json_encode($response);
+	echo json_encode($response);
+});
+
+Route::get('terminos', function () {
+
+	//return view('gallery')->with('labels', $labels);
+	return 'terminos';
 });
