@@ -30,6 +30,7 @@ html{
 	overflow: hidden;
 	padding-top: 85px;
 	box-sizing: border-box;
+	position: relative;
 
 	h1{
 		text-indent: -99999px;
@@ -80,6 +81,10 @@ html{
 			color: #fff;
 			text-decoration: underline;
 		}
+	}
+
+	.mCSB_draggerRail{
+		background: #373737;
 	}
 }
 
@@ -313,6 +318,33 @@ html{
 				}
 			}
 		}
+	}
+}
+
+#terminos{
+	h1{
+		background: url('../images/terminosTitle.png') no-repeat;
+		width: 270px;
+		height: 79px;
+		margin-top: 20px;
+	}
+
+	.terminosWrap{
+		margin: 30px 20px;
+		text-align: justify;
+		height: 450px;
+		overflow-y: scroll;
+		font-family: 'Helvetica, Arial, sans-serif';
+		font-size: 14px;
+	}
+
+	#backBtn{
+		background: url('../images/terminosX.png');
+		width: 21px;
+		height: 18px;
+		position: absolute;
+		right: 40px;
+		top: 60px;
 	}
 }
 

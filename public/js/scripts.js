@@ -48,3 +48,7 @@ $(document).ready(function(){
 		});
 	});
 });
+
+$(window).load(function(){
+	$('.terminosWrap').mCustomScrollbar();
+});

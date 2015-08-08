@@ -183,7 +183,5 @@ Route::post('ajaxVote', function () {
 });
 
 Route::get('terminos', function () {
-
-	//return view('gallery')->with('labels', $labels);
-	return 'terminos';
+	return view('terminos');
 });
