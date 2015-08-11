@@ -152,7 +152,7 @@ Route::get('gallery', function () {
 			->paginate(6);
 	}
 
-	return view('gallery')->with('labels', $labels);
+	return view('gallery')->with('labels', $labels->appends(Input::except('page')));
 });
 
 Route::post('ajaxVote', function () {

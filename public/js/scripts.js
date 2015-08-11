@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$('#registrer').validate({
 		submitHandler: function(form) {
-			$('#registrer').submit();
+			form.submit();
 		}
 	});
 

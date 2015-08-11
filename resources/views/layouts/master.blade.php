@@ -11,7 +11,6 @@
 
 	{!! HTML::script('js/jquery-1.11.1.min.js') !!}
 	{!! HTML::script('js/jquery.validate.min.js') !!}
-	{!! HTML::script('js/localization/messages_es.js') !!}
 	{!! HTML::script('js/jquery.fancybox.pack.js') !!}
 	{!! HTML::script('js/jquery.mCustomScrollbar.min.js') !!}
 	{!! HTML::script('js/scripts.js') !!}
