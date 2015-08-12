@@ -66,7 +66,13 @@ Route::any('/', function (SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb) {
 	$query = DB::table('usuarios')->where('facebookID', '=', $facebook_user['id'])->count();
 
 	if($query > 0){
-		return redirect('gallery');
+		$usuario = DB::table('usuarios')->where('facebookID', '=', $facebook_user['id'])->first();
+		$query = DB::table('label')->where('idUser', '=', $usuario->id)->count();
+		if($query > 0){
+			return redirect('gallery');
+		}else{
+			return view('uploadLabel')->with('userID', $usuario->id);
+		}
 	}else{
 		return view('index')->with('userFacebookID', $facebook_user['id']);
 	}
